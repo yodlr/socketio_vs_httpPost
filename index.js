@@ -18,9 +18,8 @@ var app = http.createServer(function (req, res) {
         console.log('HTTP streaming upload complete in ' + duration + 'ms');
         res.writeHead(200, {'Content-Type': 'text/plain'});
         res.end('okay');
-        fs.unlink(filename, function() {});
       });
-      file.pipe(fs.createWriteStream(filename));
+      file.on('data', function() {});
       counter++;
     });
     req.pipe(busboy);
@@ -39,9 +38,8 @@ io.on('connection', function(socket) {
       var duration = timeEnd - timeStart;
       console.log('socket.io streaming upload complete in ' + duration + 'ms');
       socket.disconnect();
-      fs.unlink(filename, function() {});
     });
-    stream.pipe(fs.createWriteStream(filename));
+    stream.on('data', function() {})
     counter++;
   });
 });
