@@ -61,7 +61,7 @@ function socketioTest(callback) {
       multiplex: false
     });
 
-    var stream = ss.createStream();
+    var stream = ss.createStream({hightWaterMark: 16 * 1024});
     ss(socket).emit('upload', stream, {name: filename});
     fs.createReadStream(filename).pipe(stream);
     socket.on('disconnect', function() {

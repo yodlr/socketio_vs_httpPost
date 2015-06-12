@@ -39,7 +39,7 @@ io.on('connection', function(socket) {
       console.log('socket.io streaming upload complete in ' + duration + 'ms');
       socket.disconnect();
     });
-    stream.on('data', function() {})
+    stream.on('data', function() {});
     counter++;
   });
 });
